@@ -17,7 +17,7 @@ k = st.slider("Jumlah warna (k)", min_value=2, max_value=128, value=96)
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     image = image.convert('RGB')
-    st.image(image, caption="Gambar berhasil diunggah !", use_column_width=False)
+    st.image(image, caption="Gambar berhasil diunggah !", use_container_width=False)
 
     if st.button("Mulai Kompresi"):
         img_np = np.array(image)
@@ -50,14 +50,14 @@ if uploaded_file is not None:
         col1, col2 = st.columns(2)
         with col1:
             st.subheader("🔍 Gambar Asli")
-            st.image(image, use_column_width=True)
+            st.image(image, use_container_width=True)
             st.caption(f"Ukuran: {original_size / 1024:.2f} KB")
             # with st.expander("Zoom Gambar Asli"):
             #     st.image(image, use_column_width=False)
 
         with col2:
             st.subheader("📉 Gambar Setelah Kompresi")
-            st.image(result_image, use_column_width=True)
+            st.image(result_image, use_container_width=True)
             st.caption(f"Ukuran: {compressed_size / 1024:.2f} KB ({compression_ratio:.2f}% dari ukuran asli)")
             # with st.expander("Zoom Gambar Kompresi"):
             #     st.image(result_image, use_column_width=False)
