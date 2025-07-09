@@ -16,7 +16,7 @@ k = st.slider("Jumlah warna (k)", min_value=2, max_value=128, value=96)
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    image = image.convert('RGB')
+    # image = image.convert('RGB')
     st.image(image, caption="Gambar berhasil diunggah !", use_container_width=False)
 
     if st.button("Mulai Kompresi"):
