@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+import scikit-image
 from skimage.metrics import mean_squared_error, peak_signal_noise_ratio
 from sklearn.cluster import MiniBatchKMeans
 from PIL import Image
