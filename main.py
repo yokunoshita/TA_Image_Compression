@@ -22,9 +22,7 @@ if uploaded_file is not None:
     if st.button("Mulai Kompresi"):
         img_np = np.array(image)
 
-        original_buffer = io.BytesIO()
-        image.save(original_buffer, format="JPEG")
-        original_size = len(original_buffer.getvalue())
+        original_size = uploaded_file.getbuffer().nbytes
 
         w, h = image.size
         img_flat = img_np.reshape((-1, 3))
