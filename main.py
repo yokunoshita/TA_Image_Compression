@@ -9,14 +9,14 @@ import os
 st.set_page_config(page_title="Kompresi Gambar dengan MiniBatchKMeans", layout="wide")
 st.title("Kompresi Gambar Digital dengan Ekstraksi Palet Warna")
 
-uploaded_file = st.file_uploader("Unggah gambar (bisa drag & drop)", type=["jpg", "jpeg"], accept_multiple_files=False)
+uploaded_file = st.file_uploader("Unggah gambar", type=["jpg", "jpeg"], accept_multiple_files=False)
 
 # Slider
 k = st.slider("Jumlah warna (k)", min_value=2, max_value=128, value=96)
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    # image = image.convert('RGB')
+    image = image.convert('RGB')
     st.image(image, caption="Gambar berhasil diunggah !", use_container_width=False)
 
     if st.button("Mulai Kompresi"):
@@ -29,7 +29,7 @@ if uploaded_file is not None:
         w, h = image.size
         img_flat = img_np.reshape((-1, 3))
 
-        st.info("Melakukan clustering dengan MiniBatchKMeans...")
+        st.info("Melakukan kompresi dengan MiniBatchKMeans...")
         kmeans = MiniBatchKMeans(n_clusters=k, random_state=42, batch_size=100)
         labels = kmeans.fit_predict(img_flat)
         quant = kmeans.cluster_centers_.astype("uint8")[labels]
@@ -72,7 +72,7 @@ if uploaded_file is not None:
             st.metric(label="🔊 PSNR (Peak Signal-to-Noise Ratio)", value=f"{psnr:.2f} dB")
 
         st.download_button(
-            label="💾 Unduh Gambar Hasil Kompresi",
+            label="Unduh Gambar Hasil Kompresi",
             data=result_buffer.getvalue(),
             file_name="compressed_image.jpg",
             mime="image/jpg"
